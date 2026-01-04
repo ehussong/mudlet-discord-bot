@@ -1,0 +1,55 @@
+{
+  "clear_mapper_bug": {
+    "messages": [
+      {"author": "MapperUser", "content": "Hi, I'm having a problem with Mudlet on Windows 11."},
+      {"author": "MapperUser", "content": "Whenever I try to use the mapper to add a new room, the entire application crashes."},
+      {"author": "Helper", "content": "Can you tell us more about what happens?"},
+      {"author": "MapperUser", "content": "I click on the 'add room' button in the mapper toolbar, and Mudlet just closes instantly. No error message, just gone."},
+      {"author": "Helper", "content": "That sounds like a crash. Does it happen every time?"},
+      {"author": "MapperUser", "content": "Yes, 100% reproducible. I'm on Mudlet 4.18.0."}
+    ],
+    "expected_labels": ["OS:Windows", "mapper bug", "high"]
+  },
+  "lua_scripting_error": {
+    "messages": [
+      {"author": "ScriptDev", "content": "After updating to 4.18 on Ubuntu, my sendGMCP calls are throwing errors."},
+      {"author": "ScriptDev", "content": "The exact error is: 'sendGMCP: bad argument #1 to 'sendGMCP' (string expected, got nil)'"},
+      {"author": "Helper", "content": "Was this working before the update?"},
+      {"author": "ScriptDev", "content": "Yes, this script worked perfectly on 4.17. The update broke something."},
+      {"author": "ScriptDev", "content": "I haven't changed any of my Lua code. It's definitely a regression from the update."}
+    ],
+    "expected_labels": ["OS:GNU/Linux", "Lua only", "regression"]
+  },
+  "vague_report": {
+    "messages": [
+      {"author": "VagueUser", "content": "mudlet is broken"},
+      {"author": "Helper", "content": "Can you provide more details? What exactly is broken?"},
+      {"author": "VagueUser", "content": "it just doesn't work"},
+      {"author": "Helper", "content": "What were you trying to do? What happened instead?"},
+      {"author": "VagueUser", "content": "idk it's just broken"}
+    ],
+    "expected_labels": []
+  },
+  "feature_request": {
+    "messages": [
+      {"author": "ThemeUser", "content": "I have a suggestion for Mudlet."},
+      {"author": "ThemeUser", "content": "It would be really nice if there was a dark mode option for the UI."},
+      {"author": "Helper", "content": "That's a feature request. Can you describe what you'd like?"},
+      {"author": "ThemeUser", "content": "Yes, I'd love to have a dark theme option in the display settings. The bright window is hard on my eyes at night."},
+      {"author": "ThemeUser", "content": "Please add this feature, it would make Mudlet so much better for late night gaming."}
+    ],
+    "expected_labels": ["wishlist", "UI"]
+  },
+  "multi_platform": {
+    "messages": [
+      {"author": "CrossPlatform", "content": "I've found a mapper bug that happens on multiple operating systems."},
+      {"author": "CrossPlatform", "content": "I tested this on both Windows 10 and Linux (Ubuntu 22.04)."},
+      {"author": "Helper", "content": "Interesting. What's the issue?"},
+      {"author": "CrossPlatform", "content": "When you have a large area with over 1000 rooms, the room exits sometimes don't render correctly."},
+      {"author": "CrossPlatform", "content": "The exit lines just disappear randomly. Same behavior on Windows and my Linux machine."},
+      {"author": "Helper", "content": "Can you reproduce it consistently?"},
+      {"author": "CrossPlatform", "content": "Yes, happens every time I zoom in on certain parts of the map."}
+    ],
+    "expected_labels": ["OS:Windows", "OS:GNU/Linux", "mapper bug"]
+  }
+}
