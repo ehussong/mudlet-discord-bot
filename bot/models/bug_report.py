@@ -14,6 +14,7 @@ class BugReport:
     labels: list[str]
     source_channel_id: str
     source_user_id: str
+    reporter_name: str
     discord_link: str
     confidence: str = "high"
     missing_info: str | None = None
@@ -33,6 +34,21 @@ class BugReport:
         error = self.error_output.strip() if self.error_output.strip() else "N/A"
         extra = self.extra_info if self.extra_info.strip() else "N/A"
 
+        reporter_name = self.reporter_name.strip() or "Unknown"
+        reporter_link = (
+            f"https://discord.com/users/{self.source_user_id}"
+            if self.source_user_id
+            else ""
+        )
+        reporter = (
+            f"[{reporter_name}]({reporter_link})" if reporter_link else reporter_name
+        )
+        source_message = (
+            f"[Source message]({self.discord_link})"
+            if self.discord_link
+            else "Source message: N/A"
+        )
+
         return f"""#### Brief summary of issue:
 {self.summary}
 
@@ -46,7 +62,7 @@ class BugReport:
 {extra}
 
 ---
-*Auto-generated from Discord by mudlet-bug-bot • [Original conversation]({self.discord_link})*"""
+*Auto-generated from Discord by mudlet-bug-bot • Reporter: {reporter} • {source_message}*"""
 
     @classmethod
     def from_llm_output(
@@ -54,6 +70,7 @@ class BugReport:
         llm_output: dict[str, Any],
         source_channel_id: str,
         source_user_id: str,
+        reporter_name: str,
         discord_link: str,
         labels: list[str] | None = None
     ) -> "BugReport":
@@ -66,6 +83,7 @@ class BugReport:
             labels=labels or [],
             source_channel_id=source_channel_id,
             source_user_id=source_user_id,
+            reporter_name=reporter_name,
             discord_link=discord_link,
             confidence=llm_output.get("confidence", "high"),
             missing_info=llm_output.get("missing_info")

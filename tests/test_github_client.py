@@ -12,7 +12,8 @@ def sample_report() -> BugReport:
     return BugReport(
         summary="Test bug report", steps=["Step 1", "Step 2"], error_output="Error here",
         extra_info="Version 1.0", labels=["OS:Windows", "high"], source_channel_id="123",
-        source_user_id="456", discord_link="https://discord.com/channels/1/2/3"
+        source_user_id="456", reporter_name="TestUser",
+        discord_link="https://discord.com/channels/1/2/3"
     )
 
 

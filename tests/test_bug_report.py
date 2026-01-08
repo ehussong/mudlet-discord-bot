@@ -12,6 +12,7 @@ def test_bug_report_to_github_body() -> None:
         labels=["OS:Windows", "mapper bug", "high"],
         source_channel_id="123456789",
         source_user_id="987654321",
+        reporter_name="TestUser",
         discord_link="https://discord.com/channels/123/456/789"
     )
     body = report.to_github_body()
@@ -22,13 +23,15 @@ def test_bug_report_to_github_body() -> None:
     assert "#### Error output" in body
     assert "Segfault at 0x7fff5fbff8c0" in body
     assert "Auto-generated from Discord" in body
+    assert "Reporter: [TestUser](https://discord.com/users/987654321)" in body
 
 
 def test_bug_report_title_truncates() -> None:
     """Title should truncate long summaries to 80 chars."""
     report = BugReport(
         summary="A" * 100, steps=[], error_output="", extra_info="",
-        labels=[], source_channel_id="123", source_user_id="456", discord_link=""
+        labels=[], source_channel_id="123", source_user_id="456",
+        reporter_name="TestUser", discord_link=""
     )
     assert len(report.title) <= 80
     assert report.title.endswith("...")
@@ -38,7 +41,8 @@ def test_bug_report_no_error_shows_na() -> None:
     """Empty error_output should show N/A in body."""
     report = BugReport(
         summary="Test bug", steps=["Step 1"], error_output="", extra_info="Info",
-        labels=[], source_channel_id="123", source_user_id="456", discord_link=""
+        labels=[], source_channel_id="123", source_user_id="456",
+        reporter_name="TestUser", discord_link=""
     )
     body = report.to_github_body()
     assert "N/A" in body
@@ -53,7 +57,7 @@ def test_bug_report_from_llm_output() -> None:
     }
     report = BugReport.from_llm_output(
         llm_output, source_channel_id="123", source_user_id="456",
-        discord_link="https://discord.com/..."
+        reporter_name="TestUser", discord_link="https://discord.com/..."
     )
     assert report.summary == "Test summary"
     assert report.steps == ["Step 1", "Step 2"]

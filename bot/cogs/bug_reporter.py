@@ -412,6 +412,7 @@ class BugReporter(commands.Cog):
                 llm_output=llm_output,
                 source_channel_id=str(channel.id),
                 source_user_id=str(interaction.user.id),
+                reporter_name=interaction.user.display_name,
                 discord_link=discord_link,
                 labels=validated_labels,
             )
